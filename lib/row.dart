@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(child: Container(color: Colors.red, height: 50)),
             Expanded(child: Container(color: Colors.green, height: 50)),
