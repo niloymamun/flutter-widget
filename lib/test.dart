@@ -28,17 +28,20 @@ class MyHomePage extends StatelessWidget {
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: [Icon(Icons.call), Text('Call')],
+              children: [
+                Icon(Icons.call, color: Colors.deepPurple),
+                Text('Call'),
+              ],
             ),
             SizedBox(width: 20), // আইকন গুলোর মধ্যে gap
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: [Icon(Icons.route), Text('Route')],
+              children: [Icon(Icons.route, color: Colors.cyan), Text('Route')],
             ),
             SizedBox(width: 20),
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: [Icon(Icons.share), Text('Share')],
+              children: [Icon(Icons.share, color: Colors.green), Text('Share')],
             ),
           ],
         ),
