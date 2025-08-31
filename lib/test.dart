@@ -36,12 +36,18 @@ class MyHomePage extends StatelessWidget {
             SizedBox(width: 20), // আইকন গুলোর মধ্যে gap
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: [Icon(Icons.route, color: Colors.cyan), Text('Route')],
+              children: [
+                Icon(Icons.route, color: Colors.cyan),
+                Text('Route'),
+              ],
             ),
             SizedBox(width: 20),
             Column(
               mainAxisSize: MainAxisSize.min,
-              children: [Icon(Icons.share, color: Colors.green), Text('Share')],
+              children: [
+                Icon(Icons.share, color: Colors.green),
+                Text('Share'),
+              ],
             ),
           ],
         ),
