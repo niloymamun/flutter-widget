@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(LayoutDesign());
+  runApp(MyLayout());
 }
 
-class LayoutDesign extends StatelessWidget {
-  const LayoutDesign({super.key});
+class MyLayout extends StatelessWidget {
+  const MyLayout({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(title: 'Layout Design', home: LayoutHomePage());
+    return MaterialApp(home: HomePage());
   }
 }
 
-class LayoutHomePage extends StatelessWidget {
-  const LayoutHomePage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: Center(
         child: Row(
@@ -41,7 +40,7 @@ class LayoutHomePage extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.share, color: Colors.lightGreen),
+                Icon(Icons.share, color: const Color.fromARGB(255, 255, 0, 64)),
                 Text('Share', style: TextStyle(fontSize: 24)),
               ],
             ),

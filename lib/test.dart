@@ -1,52 +1,48 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(LayoutDesign());
+}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class LayoutDesign extends StatelessWidget {
+  const LayoutDesign({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Multiple Layout Widget',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: MyHomePage(),
-    );
+    // TODO: implement build
+    return MaterialApp(home: LayoutHomePage());
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class LayoutHomePage extends StatelessWidget {
+  const LayoutHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Scaffold(
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.call, color: Colors.deepPurple),
-                Text('Call'),
+                Text('Call', style: TextStyle(fontSize: 24)),
               ],
             ),
-            SizedBox(width: 20), // আইকন গুলোর মধ্যে gap
             Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.route, color: Colors.cyan),
-                Text('Route'),
+                Text('Route', style: TextStyle(fontSize: 24)),
               ],
             ),
-            SizedBox(width: 20),
             Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.share, color: Colors.green),
-                Text('Share'),
+                Icon(Icons.share, color: Colors.lightGreen),
+                Text('Share', style: TextStyle(fontSize: 24)),
               ],
             ),
           ],
