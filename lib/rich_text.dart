@@ -6,6 +6,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(home: MyTextPage());
@@ -13,6 +15,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyTextPage extends StatelessWidget {
+  const MyTextPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +34,7 @@ class MyTextPage extends StatelessWidget {
                   fontSize: 20,
                 ),
 
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    print('click me');
-                  },
+                recognizer: TapGestureRecognizer()..onTap = () {},
               ),
             ],
           ),
