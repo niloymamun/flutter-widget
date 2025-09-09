@@ -11,16 +11,17 @@ class MyColumn extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.star, size: 40),
-            Icon(Icons.star, size: 40),
-            Icon(Icons.star, size: 40),
-            Icon(Icons.star, size: 40),
-            Icon(Icons.star, size: 40),
-            Icon(Icons.star, size: 40),
-          ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Icon(Icons.star, size: 40),
+              Icon(Icons.star, size: 40),
+              Icon(Icons.star, size: 40),
+              Icon(Icons.star, size: 40),
+              Icon(Icons.star, size: 40),
+            ],
+          ),
         ),
       ),
     );
