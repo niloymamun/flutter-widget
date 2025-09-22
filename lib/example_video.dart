@@ -1,119 +1,136 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TextButton Demo',
+      title: 'OutlinedButton Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        textButtonTheme: TextButtonThemeData(
-          // অ্যাপ-লেভেল টেক্সটবাটন থিম (optional)
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.deepPurple,
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            foregroundColor: Colors.blue,
+            side: const BorderSide(color: Colors.blue),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
         ),
       ),
-      home: TextButtonDemoPage(),
-      debugShowCheckedModeBanner: false,
+      home: const OutlinedButtonDemo(),
     );
   }
 }
 
-class TextButtonDemoPage extends StatelessWidget {
-  const TextButtonDemoPage({super.key});
+class OutlinedButtonDemo extends StatelessWidget {
+  const OutlinedButtonDemo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('TextButton: Live Examples')),
+      appBar: AppBar(title: const Text('OutlinedButton Examples')),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              '1) Default TextButton',
-              style: Theme.of(context).textTheme.titleMedium,
+            const Text(
+              '1) Basic Example',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
-            TextButton(onPressed: () {}, child: Text('Default TextButton')),
-
-            Divider(),
-
-            Text(
-              '2) TextButton.icon (Icon + Label)',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            SizedBox(height: 8),
-            TextButton.icon(
+            const SizedBox(height: 8),
+            OutlinedButton(
               onPressed: () {},
-              icon: Icon(Icons.thumb_up_alt_outlined),
-              label: Text('Like'),
+              child: const Text('Basic OutlinedButton'),
             ),
 
-            Divider(),
-
-            Text(
-              '3) Styled with TextButton.styleFrom (background + foreground)',
-              style: Theme.of(context).textTheme.titleMedium,
+            const SizedBox(height: 20),
+            const Text(
+              '2) Custom Style',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.blue, // gives a filled look (optional)
-                foregroundColor: Colors.white, // text/icon color
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            const SizedBox(height: 8),
+            OutlinedButton(
+              onPressed: () => {},
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Colors.green, width: 2),
+                shape: const StadiumBorder(),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 14,
+                  horizontal: 24,
+                ),
+                foregroundColor: Colors.green,
+                textStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              child: Text('Styled Button'),
+              child: const Text('Custom OutlinedButton'),
             ),
 
-            Divider(),
-
-            Text(
-              '4) Disabled TextButton (onPressed: null)',
-              style: Theme.of(context).textTheme.titleMedium,
+            const SizedBox(height: 20),
+            const Text(
+              '3) With Icon (text + icon)',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
-            TextButton(
-              onPressed: null, // disabled
-              child: Text('Disabled Button'),
+            const SizedBox(height: 8),
+            OutlinedButton.icon(
+              onPressed: () => {},
+              icon: const Icon(Icons.send),
+              label: const Text('Send'),
             ),
 
-            Divider(),
-
-            Text(
-              '6) Comparison: TextButton vs ElevatedButton',
-              style: Theme.of(context).textTheme.titleMedium,
+            const SizedBox(height: 20),
+            const Text(
+              '4) Icon-only (circle)',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
+            // disabled example with circleBorder
             Row(
               children: [
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text('TextButton'),
+                OutlinedButton(
+                  onPressed: () => {},
+                  style: OutlinedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(12),
+                    side: const BorderSide(width: 2, color: Colors.purple),
                   ),
+                  child: const Icon(Icons.favorite),
                 ),
-                SizedBox(width: 12),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text('ElevatedButton'),
-                  ),
+                const SizedBox(width: 12),
+                OutlinedButton(
+                  onPressed: null, // disabled example
+                  child: const Text('Disabled'),
                 ),
               ],
+            ),
+
+            const SizedBox(height: 20),
+            const Text(
+              '5) State-aware style (pressed -> red border)',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            OutlinedButton(
+              onPressed: () => {},
+              style: ButtonStyle(
+                side: WidgetStateProperty.resolveWith<BorderSide>((states) {
+                  // states is a Set<WidgetState>
+                  if (states.contains(WidgetState.pressed)) {
+                    return const BorderSide(color: Colors.red, width: 3);
+                  }
+                  return const BorderSide(
+                    color: Color.fromARGB(255, 3, 96, 218),
+                    width: 2,
+                  );
+                }),
+              ),
+
+              child: const Text('State-aware'),
             ),
           ],
         ),

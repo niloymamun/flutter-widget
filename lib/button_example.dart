@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,13 +18,15 @@ class MyApp extends StatelessWidget {
 }
 
 class ButtonsDemoPage extends StatefulWidget {
+  const ButtonsDemoPage({super.key});
+
   @override
   _ButtonsDemoPageState createState() => _ButtonsDemoPageState();
 }
 
 class _ButtonsDemoPageState extends State<ButtonsDemoPage> {
   bool _isLoading = false;
-  List<bool> _selections = [true, false, false];
+  final List<bool> _selections = [true, false, false];
 
   void _showMsg(String text) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -145,17 +149,17 @@ class _ButtonsDemoPageState extends State<ButtonsDemoPage> {
             ),
             SizedBox(height: 8),
             ToggleButtons(
-              children: [
-                Icon(Icons.format_bold),
-                Icon(Icons.format_italic),
-                Icon(Icons.format_underline),
-              ],
               isSelected: _selections,
               onPressed: (int index) {
                 setState(() {
                   _selections[index] = !_selections[index];
                 });
               },
+              children: [
+                Icon(Icons.format_bold),
+                Icon(Icons.format_italic),
+                Icon(Icons.format_underline),
+              ],
             ),
             SizedBox(height: 16),
 

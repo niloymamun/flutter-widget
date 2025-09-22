@@ -28,6 +28,8 @@ class MyApp extends StatelessWidget {
 }
 
 class DemoPage extends StatefulWidget {
+  const DemoPage({super.key});
+
   @override
   // ignore: library_private_types_in_public_api
   _DemoPageState createState() => _DemoPageState();
