@@ -9,11 +9,7 @@ class IconButtonExamplesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'IconButton Examples',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        // global icon theme (theming section will show effect)
-        iconTheme: const IconThemeData(color: Colors.teal, size: 28),
-      ),
+
       home: const IconButtonExamplesPage(),
     );
   }
@@ -39,24 +35,29 @@ class _IconButtonExamplesPageState extends State<IconButtonExamplesPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                icon: const Icon(Icons.menu),
-                tooltip: 'Open menu',
                 onPressed: () {},
+                icon: Icon(Icons.menu),
+                tooltip: 'Open menu',
               ),
-              const SizedBox(width: 10),
-              // favorite
+              SizedBox(width: 10),
               IconButton(
+                onPressed: () {
+                  setState(() {
+                    isFavorite = !isFavorite;
+                  });
+                },
                 icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-                tooltip: isFavorite ? 'Unfavorite' : 'Favorite',
+
+                tooltip: isFavorite ? 'Unfavorite' : "favorite",
                 color: isFavorite ? Colors.red : null,
                 iconSize: 30,
-                onPressed: () => setState(() => isFavorite = !isFavorite),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: 10),
+              // disabled state
               IconButton(
-                icon: const Icon(Icons.search),
-                tooltip: 'Search (disabled)',
-                onPressed: null, // disabled state
+                onPressed: null,
+                icon: Icon(Icons.search),
+                tooltip: 'Search Disabled',
               ),
             ],
           ),
@@ -64,111 +65,104 @@ class _IconButtonExamplesPageState extends State<IconButtonExamplesPage> {
           // ===== 2. CUSTOM STYLE =====
           Column(
             children: [
-              // Ink + IconButton -> circular background with ink splash
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Ink(
                     decoration: BoxDecoration(
-                      color: Colors.blue.shade50,
+                      color: Colors.blue.shade500,
                       shape: BoxShape.circle,
                     ),
                     child: IconButton(
-                      icon: const Icon(Icons.send),
-                      splashRadius: 26,
-                      color: Colors.blue,
                       onPressed: () {},
+                      icon: Icon(Icons.send),
+                      splashRadius: 26,
+                      color: Colors.purpleAccent,
                     ),
                   ),
                   const SizedBox(width: 12),
+
                   // RawMaterialButton as an alternative (more control)
                   RawMaterialButton(
                     onPressed: () {},
                     elevation: 2,
-                    fillColor: Colors.green,
-                    padding: const EdgeInsets.all(12),
-                    shape: const CircleBorder(),
-                    child: const Icon(Icons.call, color: Colors.white),
+                    fillColor: const Color.fromARGB(255, 2, 16, 219),
+                    padding: EdgeInsets.all(12),
+                    shape: CircleBorder(),
+                    child: Icon(Icons.call, color: Colors.white),
                   ),
+                  const SizedBox(height: 8),
                 ],
               ),
-              const SizedBox(height: 8),
             ],
           ),
-
-          // ===== 3. ICON + TEXT BUTTON =====
           Wrap(
             spacing: 12,
             runSpacing: 8,
             alignment: WrapAlignment.center,
             children: [
               ElevatedButton.icon(
-                icon: const Icon(Icons.add),
-                label: const Text('Add'),
                 onPressed: () {},
+                label: Text('Add'),
+                icon: Icon(Icons.add),
               ),
               TextButton.icon(
+                onPressed: () {},
                 icon: const Icon(Icons.edit),
                 label: const Text('Edit'),
-                onPressed: () {},
               ),
               OutlinedButton.icon(
+                onPressed: () {},
                 icon: const Icon(Icons.share),
                 label: const Text('Share'),
-                onPressed: () {},
               ),
             ],
           ),
-
           // ===== 4. ICON-ONLY ALTERNATIVES =====
           Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Icon wrapped with InkWell (gives ripple)
                   Material(
-                    color: Colors.transparent,
+                    color: const Color.fromARGB(0, 4, 7, 226),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(8),
                       onTap: () {},
+                      onDoubleTap: () {},
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8),
                         child: Icon(Icons.thumb_up),
                       ),
                     ),
                   ),
                   const SizedBox(width: 12),
-                  // Simple Icon inside GestureDetector (no ripple)
+
                   GestureDetector(
-                    onTap: () => {},
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    onDoubleTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
                       child: Icon(Icons.lightbulb_outline),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
             ],
           ),
 
           // ===== 5. THEMING =====
           Column(
             children: [
-              const SizedBox(height: 8),
+              SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // this iconbutton picks color/size from Theme.iconTheme because no explicit color/size
-                  IconButton(icon: const Icon(Icons.star), onPressed: () {}),
-                  const SizedBox(width: 12),
-                  // override locally with IconTheme
+                  IconButton(onPressed: () {}, icon: Icon(Icons.star)),
                   IconTheme(
-                    data: const IconThemeData(color: Colors.purple, size: 36),
+                    data: IconThemeData(color: Colors.deepPurple, size: 40),
                     child: IconButton(
-                      icon: const Icon(Icons.star_border),
                       onPressed: () {},
+                      icon: Icon(Icons.star_border),
                     ),
                   ),
                 ],
