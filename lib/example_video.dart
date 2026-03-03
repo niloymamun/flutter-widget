@@ -1,181 +1,32 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const IconButtonExamplesApp());
+void main() => runApp(const MyApp());
 
-class IconButtonExamplesApp extends StatelessWidget {
-  const IconButtonExamplesApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'IconButton Examples',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        // global icon theme (theming section will show effect)
-        iconTheme: const IconThemeData(color: Colors.teal, size: 28),
-      ),
-      home: const IconButtonExamplesPage(),
-    );
+    return MaterialApp(title: 'FAB Demo', home: const HomePage());
   }
 }
 
-class IconButtonExamplesPage extends StatefulWidget {
-  const IconButtonExamplesPage({super.key});
-
-  @override
-  State<IconButtonExamplesPage> createState() => _IconButtonExamplesPageState();
-}
-
-class _IconButtonExamplesPageState extends State<IconButtonExamplesPage> {
-  bool isFavorite = false;
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('IconButton Video Demo')),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.menu),
-                tooltip: 'Open menu',
-                onPressed: () {},
-              ),
-              const SizedBox(width: 10),
-              // favorite
-              IconButton(
-                icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-                tooltip: isFavorite ? 'Unfavorite' : 'Favorite',
-                color: isFavorite ? Colors.red : null,
-                iconSize: 30,
-                onPressed: () => setState(() => isFavorite = !isFavorite),
-              ),
-              const SizedBox(width: 10),
-              IconButton(
-                icon: const Icon(Icons.search),
-                tooltip: 'Search (disabled)',
-                onPressed: null, // disabled state
-              ),
-            ],
-          ),
-
-          // ===== 2. CUSTOM STYLE =====
-          Column(
-            children: [
-              // Ink + IconButton -> circular background with ink splash
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Ink(
-                    decoration: BoxDecoration(
-                      color: Colors.blue.shade50,
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.send),
-                      splashRadius: 26,
-                      color: Colors.blue,
-                      onPressed: () {},
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  // RawMaterialButton as an alternative (more control)
-                  RawMaterialButton(
-                    onPressed: () {},
-                    elevation: 2,
-                    fillColor: Colors.green,
-                    padding: const EdgeInsets.all(12),
-                    shape: const CircleBorder(),
-                    child: const Icon(Icons.call, color: Colors.white),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-            ],
-          ),
-
-          // ===== 3. ICON + TEXT BUTTON =====
-          Wrap(
-            spacing: 12,
-            runSpacing: 8,
-            alignment: WrapAlignment.center,
-            children: [
-              ElevatedButton.icon(
-                icon: const Icon(Icons.add),
-                label: const Text('Add'),
-                onPressed: () {},
-              ),
-              TextButton.icon(
-                icon: const Icon(Icons.edit),
-                label: const Text('Edit'),
-                onPressed: () {},
-              ),
-              OutlinedButton.icon(
-                icon: const Icon(Icons.share),
-                label: const Text('Share'),
-                onPressed: () {},
-              ),
-            ],
-          ),
-
-          // ===== 4. ICON-ONLY ALTERNATIVES =====
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Icon wrapped with InkWell (gives ripple)
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(8),
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.thumb_up),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  // Simple Icon inside GestureDetector (no ripple)
-                  GestureDetector(
-                    onTap: () => {},
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.lightbulb_outline),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-            ],
-          ),
-
-          // ===== 5. THEMING =====
-          Column(
-            children: [
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // this iconbutton picks color/size from Theme.iconTheme because no explicit color/size
-                  IconButton(icon: const Icon(Icons.star), onPressed: () {}),
-                  const SizedBox(width: 12),
-                  // override locally with IconTheme
-                  IconTheme(
-                    data: const IconThemeData(color: Colors.purple, size: 36),
-                    child: IconButton(
-                      icon: const Icon(Icons.star_border),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+      appBar: AppBar(title: const Text('FAB — SnackBar Example')),
+      body: const Center(child: Text('Press the FAB')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // এখানে ScaffoldMessenger সঠিকভাবে কাজ করবে
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('FAB pressed!')));
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
