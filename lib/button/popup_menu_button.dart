@@ -20,22 +20,23 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Popup Menu Example"),
+        title: Text('Popup Menu Example'),
         actions: [
-          PopupMenuButton<String>(
+          PopupMenuButton(
             icon: Icon(Icons.menu),
             onSelected: (value) {
-              print(value);
+              if (value == 'Profile') {
+                print('Value is profile');
+              }
             },
             itemBuilder: (context) => [
-              PopupMenuItem(value: "Profile", child: Text("Profile")),
-              PopupMenuItem(value: "Settings", child: Text("Settings")),
-              PopupMenuItem(value: "Logout", child: Text("Logout")),
+              PopupMenuItem(value: 'Profile', child: Text('Profile')),
+              PopupMenuItem(value: 'Settings', child: Text('Setting')),
+              PopupMenuItem(value: 'Logout', child: Text('Logout')),
             ],
           ),
         ],
       ),
-      body: Center(child: Text("Flutter PopupMenuButton Tutorial")),
     );
   }
 }
