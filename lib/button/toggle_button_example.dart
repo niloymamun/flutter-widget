@@ -30,44 +30,18 @@ class _ToggleExampleState extends State<ToggleExample> {
       body: Center(
         child: ToggleButtons(
           isSelected: isSelected,
-
           onPressed: (int index) {
             setState(() {
+              print(isSelected[index]);
               isSelected[index] = !isSelected[index];
+              print(isSelected[index]);
             });
           },
           children: [
             Icon(Icons.format_bold),
             Icon(Icons.format_italic),
-            Icon(Icons.format_underlined),
+            Icon(Icons.format_underline),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ToggleButtonExample extends StatefulWidget {
-  @override
-  _ToggleButtonExampleState createState() => _ToggleButtonExampleState();
-}
-
-class _ToggleButtonExampleState extends State<ToggleButtonExample> {
-  bool isOn = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("ON OFF Button")),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            setState(() {
-              isOn = !isOn;
-            });
-          },
-
-          child: Text(isOn ? "ON" : "OFF"),
         ),
       ),
     );
