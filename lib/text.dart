@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyWidget());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyTextPage());
+    return MaterialApp(home: Demo());
   }
 }
 
-class MyTextPage extends StatelessWidget {
-  const MyTextPage({super.key});
+class Demo extends StatefulWidget {
+  const Demo({super.key});
 
+  @override
+  State<Demo> createState() => _DemoState();
+}
+
+class _DemoState extends State<Demo> {
+  String selectedValue = "One";
+
+  final List<String> items = ["One", "Two", "Three", "Four"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Text Widget")),
+      appBar: AppBar(title: Text("DropdownButton Example")),
       body: Center(
-        child: Text(
-          'Welcome Coding with mamun',
-          style: TextStyle(
-            fontSize: 40.00,
-            color: Colors.blue,
-            fontStyle: FontStyle.italic,
-            letterSpacing: 10,
-            wordSpacing: 20,
-            fontWeight: FontWeight.w900,
-            backgroundColor: const Color.fromARGB(255, 209, 231, 9),
-            shadows: [
-              Shadow(
-                color: Colors.blueAccent,
-                offset: Offset(2, 1),
-                blurRadius: 10,
-              ),
-            ],
-          ),
+        child: DropdownButton<String>(
+          value: selectedValue,
+          items: items.map((String item) {
+            return DropdownMenuItem<String>(value: item, child: Text(item));
+          }).toList(),
+          onChanged: (String? newValue) {
+            setState(() {
+              selectedValue = newValue!;
+            });
+          },
         ),
       ),
     );
