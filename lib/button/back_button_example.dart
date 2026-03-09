@@ -15,7 +15,6 @@ class MyWidget extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
   Future<bool> showExitDialog(BuildContext context) async {
     return await showDialog(
           context: context,
@@ -43,18 +42,15 @@ class HomePage extends StatelessWidget {
       canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
-
         bool exit = await showExitDialog(context);
-
         if (!context.mounted) return;
-
         if (exit) {
           Navigator.of(context).pop();
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text("Flutter Back Button")),
-        body: const Center(
+        appBar: AppBar(title: Text('Flutter Back Button')),
+        body: Center(
           child: Text(
             "Back Button Press করে দেখুন",
             style: TextStyle(fontSize: 24),
