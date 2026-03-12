@@ -21,14 +21,14 @@ class SelectOptionDialog extends StatefulWidget {
 }
 
 class _SelectOptionDialogState extends State<SelectOptionDialog> {
-  String selectedGender = "Male";
-
+  // My Function logic
+  String selectedGender = 'Male';
   void showGenderDialog() {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Select Gender"),
+          title: Text('Select Gender'),
           content: RadioGroup<String>(
             groupValue: selectedGender,
             onChanged: (value) {
@@ -40,11 +40,9 @@ class _SelectOptionDialogState extends State<SelectOptionDialog> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                RadioListTile(title: Text("Male"), value: "Male"),
-
-                RadioListTile(title: Text("Female"), value: "Female"),
-
-                RadioListTile(title: Text("Other"), value: "Other"),
+                RadioListTile(title: Text('Male'), value: 'Male'),
+                RadioListTile(title: Text('Female'), value: 'Female'),
+                RadioListTile(title: Text('Other'), value: 'Other'),
               ],
             ),
           ),
@@ -60,9 +58,10 @@ class _SelectOptionDialogState extends State<SelectOptionDialog> {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
+            // main Function
             showGenderDialog();
           },
-          child: Text("Select Gender"),
+          child: Text('Select Gender'),
         ),
       ),
     );
