@@ -1,57 +1,49 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyWidget());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
+    return MaterialApp(home: HomePage());
   }
 }
 
 class HomePage extends StatelessWidget {
-  final TextEditingController nameController = TextEditingController();
-
   HomePage({super.key});
-
+  final TextEditingController textEditingController = TextEditingController();
   void showInputDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Enter Your Name"),
-
+          title: Text('Enter Your Name'),
           content: TextField(
-            controller: nameController,
+            controller: textEditingController,
             decoration: InputDecoration(
-              hintText: "Type your name here",
+              hintText: 'Type Your name here',
               border: OutlineInputBorder(),
             ),
           ),
-
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancel"),
+              child: Text('Cancel'),
             ),
-
             ElevatedButton(
               onPressed: () {
-                String name = nameController.text;
-
-                print("User Name: $name"); // ✅ এখানে print
-
-                nameController.clear();
-
+                String name = textEditingController.text;
+                print('User Name is $name');
+                textEditingController.clear();
                 Navigator.pop(context);
               },
-              child: Text("Submit"),
+              child: Text('Submit'),
             ),
           ],
         );
@@ -63,14 +55,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("TextField AlertDialog")),
-
       body: Center(
         child: ElevatedButton(
           onPressed: () {
+            // Function Execute
             showInputDialog(context);
           },
-
-          child: Text("Open Dialog"),
+          child: Text('Open Dialog'),
         ),
       ),
     );
