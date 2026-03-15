@@ -21,6 +21,7 @@ class ButtonsDemoPage extends StatefulWidget {
   const ButtonsDemoPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ButtonsDemoPageState createState() => _ButtonsDemoPageState();
 }
 
