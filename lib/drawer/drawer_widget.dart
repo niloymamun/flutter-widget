@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget/drawer/profile_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,57 +21,50 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Flutter Drawer Tutorial")),
-
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
-              ),
-
               accountName: Text(
-                "Al Mamun",
+                'Al Mamun',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
-
               accountEmail: Text(
-                "mamun@gmail.com",
+                'mamun@gmail.com',
                 style: TextStyle(color: Colors.white),
               ),
-
               currentAccountPicture: CircleAvatar(
                 backgroundImage: NetworkImage("https://picsum.photos/200"),
               ),
             ),
-
             ListTile(
               leading: Icon(Icons.home),
-              title: Text("Home"),
+              title: Text('Home'),
               onTap: () {},
             ),
-
             ListTile(
               leading: Icon(Icons.person),
-              title: Text("Profile"),
-              onTap: () {},
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
+              },
             ),
-
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text("Settings"),
+              title: Text('Settings'),
               onTap: () {},
             ),
-
             Divider(),
-
             ListTile(
               leading: Icon(Icons.logout),
-              title: Text("Logout"),
+              title: Text('Logout'),
               onTap: () {},
             ),
           ],
