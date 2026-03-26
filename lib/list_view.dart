@@ -1,91 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget/test_file.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyWidget());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Beautiful List UI',
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-      home: const HomePage(),
-    );
+    return MaterialApp(home: MyListView());
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class MyListView extends StatelessWidget {
+  const MyListView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 5,
-      child: Scaffold(
-        backgroundColor: Colors.grey[100],
-        appBar: AppBar(
-          elevation: 0,
-          title: const Text("Beautiful ListView UI"),
-
-          bottom: const TabBar(
-            labelColor: Color.fromARGB(255, 255, 0, 0),
-            isScrollable: true,
-            indicatorColor: Colors.deepPurpleAccent,
-            tabs: [
-              Tab(text: "Basic"),
-              Tab(text: "Long"),
-              Tab(text: "Grid"),
-              Tab(text: "Horizontal"),
-              Tab(text: "Custom"),
-            ],
-          ),
-        ),
-        body: const TabBarView(
-          children: [
-            BasicList(),
-            LongList(),
-            GridList(),
-            HorizontalList(),
-            CustomList(),
-          ],
-        ),
-      ),
+    return Scaffold(
+      appBar: AppBar(title: Text("Beautiful ListView UI")),
+      body: LongList(),
     );
   }
 }
 
 //////////////////// BASIC LIST ////////////////////
-
-class BasicList extends StatelessWidget {
-  const BasicList({super.key});
+class BasicsList extends StatelessWidget {
+  const BasicsList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
-        ColoredTile(title: "Item 1", color: Colors.red),
-        ColoredTile(title: "Item 2", color: Colors.orange),
-        ColoredTile(title: "Item 3", color: Colors.green),
+      children: [
+        ColoredTile(title: 'Title 01', color: Colors.red),
+        ColoredTile(title: 'Title 02', color: Colors.yellow),
+        ColoredTile(title: 'Title 03', color: Colors.deepPurple),
       ],
     );
   }
 }
 
+/////////////////////// ColoredTile ////////////////
 class ColoredTile extends StatelessWidget {
+  const ColoredTile({super.key, required this.title, required this.color});
   final String title;
   final Color color;
-
-  const ColoredTile({required this.title, required this.color, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(15),
@@ -93,33 +60,34 @@ class ColoredTile extends StatelessWidget {
           BoxShadow(
             color: color.withValues(alpha: 0.4),
             blurRadius: 8,
-            offset: const Offset(0, 5),
+            offset: Offset(0, 5),
           ),
         ],
       ),
-      child: Text(
-        title,
-        style: const TextStyle(color: Colors.white, fontSize: 18),
-      ),
+
+      child: Text(title, style: const TextStyle(fontSize: 18)),
     );
   }
 }
 
-//////////////////// LONG LIST ////////////////////
+// 🎨 color method
+Color getColor(int index) {
+  List<Color> colors = [
+    Colors.purple,
+    Colors.blue,
+    Colors.teal,
+    Colors.orange,
+    Colors.pink,
+    Colors.deepPurple,
+    Colors.green,
+    Colors.redAccent,
+  ];
+  return colors[index % colors.length];
+}
 
+//////////////////// LONG LIST ////////////////////
 class LongList extends StatelessWidget {
   const LongList({super.key});
-
-  Color getColor(int index) {
-    List<Color> colors = [
-      Colors.purple,
-      Colors.blue,
-      Colors.teal,
-      Colors.orange,
-      Colors.pink,
-    ];
-    return colors[index % colors.length];
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,19 +96,17 @@ class LongList extends StatelessWidget {
       itemBuilder: (context, index) {
         final color = getColor(index);
         return Container(
-          margin: const EdgeInsets.all(10),
+          margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [color, color.withValues(alpha: 0.6)],
             ),
             borderRadius: BorderRadius.circular(15),
           ),
+
           child: ListTile(
-            leading: const Icon(Icons.person, color: Colors.white),
-            title: Text(
-              "User $index",
-              style: const TextStyle(color: Colors.white),
-            ),
+            leading: Icon(Icons.person, color: Colors.white),
+            title: Text('User $index', style: TextStyle(color: Colors.white)),
           ),
         );
       },
@@ -149,32 +115,33 @@ class LongList extends StatelessWidget {
 }
 
 //////////////////// GRID LIST ////////////////////
-
 class GridList extends StatelessWidget {
   const GridList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.all(10),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
-      itemCount: 10,
+      itemCount: 100,
       itemBuilder: (context, index) {
+        final color = getColor(index);
         return Container(
+          margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.indigo, Colors.blueAccent],
+              colors: [color, color.withValues(alpha: 0.6)],
             ),
             borderRadius: BorderRadius.circular(20),
           ),
+
           child: Center(
             child: Text(
-              "Item $index",
-              style: const TextStyle(color: Colors.white, fontSize: 18),
+              'Item $index',
+              style: TextStyle(color: Colors.white, fontSize: 18),
             ),
           ),
         );
@@ -184,7 +151,6 @@ class GridList extends StatelessWidget {
 }
 
 //////////////////// HORIZONTAL LIST ////////////////////
-
 class HorizontalList extends StatelessWidget {
   const HorizontalList({super.key});
 
@@ -192,27 +158,29 @@ class HorizontalList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: 10,
+      itemCount: 30,
       itemBuilder: (context, index) {
-        return Container(
-          width: 150,
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Colors.pink, Colors.orange],
-            ),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.pink.withValues(alpha: 0.4),
-                blurRadius: 10,
+        final color = getColor(index);
+        return Center(
+          child: Container(
+            height: 150,
+            width: 150,
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [color, color.withValues(alpha: 0.6)],
               ),
-            ],
-          ),
-          child: Center(
-            child: Text(
-              "Item $index",
-              style: const TextStyle(color: Colors.white, fontSize: 18),
+              borderRadius: BorderRadius.circular(15),
+            ),
+
+            child: Center(
+              child: ListTile(
+                leading: Icon(Icons.person, color: Colors.white),
+                title: Text(
+                  'User $index',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
           ),
         );
@@ -221,31 +189,80 @@ class HorizontalList extends StatelessWidget {
   }
 }
 
-//////////////////// CUSTOM UI ////////////////////
+// 🌐 Different network images
+String gitImage(int index) {
+  List<String> images = [
+    "https://picsum.photos/id/1011/200",
+    "https://picsum.photos/id/1012/200",
+    "https://picsum.photos/id/1013/200",
+    "https://picsum.photos/id/1014/200",
+    "https://picsum.photos/id/1015/200",
+  ];
+  return images[index % images.length];
+}
 
+//////////////////// CUSTOM UI ////////////////////
 class CustomList extends StatelessWidget {
   const CustomList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: 30,
       itemBuilder: (context, index) {
+        final image = getImage(index);
+        final color = getColor(index);
         return Container(
-          margin: const EdgeInsets.all(10),
+          margin: EdgeInsets.all(10),
           child: Card(
             elevation: 8,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            child: ListTile(
-              leading: const CircleAvatar(
-                radius: 28,
-                backgroundImage: NetworkImage("https://picsum.photos/200"),
-              ),
-              title: Text("User $index"),
-              subtitle: const Text("UI Designer"),
-              trailing: const Icon(Icons.arrow_forward_ios),
+            clipBehavior: Clip.hardEdge,
+            child: Stack(
+              children: [
+                Ink.image(
+                  image: NetworkImage(image),
+                  height: 120,
+                  fit: BoxFit.cover,
+                  child: Container(
+                    height: 120,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          color.withValues(alpha: 0.7),
+                          Colors.black.withValues(alpha: 0.3),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.all(16),
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Image.network(
+                      image,
+                      width: 60,
+                      height: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+
+                  title: Text(
+                    'User $index',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  subtitle: Text(
+                    'Flutter Developer',
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                ),
+              ],
             ),
           ),
         );
